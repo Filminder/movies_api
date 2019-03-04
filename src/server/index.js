@@ -2,6 +2,7 @@ const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
 const indexRoutes = require('./routes/index');
 const movieRoutes = require('./routes/movies');
+require('dotenv').config()
 
 const app = new Koa();
 const PORT = process.env.PORT || 3000;
