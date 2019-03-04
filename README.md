@@ -62,3 +62,5 @@ $ npm start
 ```
 http://localhost:300
 ```
+
+[Wiki Doc](https://github.com/yasskate/movies_api/wiki/Movies-API)
