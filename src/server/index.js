@@ -10,7 +10,6 @@ app.use(bodyParser());
 app.use(indexRoutes.routes());
 app.use(movieRoutes.routes());
 
-
 const server = app.listen(PORT, () => {
   console.log(`server listening on: http://localhost:${PORT}`);
 });
