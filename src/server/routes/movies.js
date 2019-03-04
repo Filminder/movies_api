@@ -23,7 +23,6 @@ router.get(BASE_URL, async ctx => {
 router.get(`${BASE_URL}/:id`, async ctx => {
   try {
     const movie = await queries.getSingleMovie(ctx.params.id);
-    console.log(movies);
     if (movie.length) {
       ctx.body = {
         status: 'success',
