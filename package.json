@@ -1,0 +1,24 @@
+{
+  "name": "movies_api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./src/server/index.js",
+    "test": "./node_modules/mocha/bin/_mocha"
+  },
+  "keywords": [],
+  "author": "Yasser Batas",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "4.1.1",
+    "chai-http": "^4.2.1",
+    "mocha": "^5.2.0"
+  },
+  "dependencies": {
+    "knex": "^0.13.0",
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.2.1",
+    "pg": "^7.1.2"
+  }
+}
