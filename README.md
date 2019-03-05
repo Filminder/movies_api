@@ -1,5 +1,10 @@
 # Movies API
 
+## Heroku app
+
+[Movies API Heroku App](https://movies-api-koa.herokuapp.com/)
+[Wiki Doc (Endpoints)](https://github.com/yasskate/movies_api/wiki/Movies-API)
+
 ## Getting Started With Movies API
 
 * Download the repo:
@@ -62,5 +67,3 @@ $ npm start
 ```
 http://localhost:300
 ```
-
-[Wiki Doc](https://github.com/yasskate/movies_api/wiki/Movies-API)
