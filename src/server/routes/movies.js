@@ -12,32 +12,39 @@ router.get(BASE_URL, async ctx => {
       data: movies
     };
   } catch (err) {
-    ctx.status = 404
+    ctx.status = 404;
     ctx.body = {
       status: 'error',
       type: 'application/json'
-    }
+    };
   }
 });
 
+const responseError = ctx => {
+  ctx.status = 404;
+
+  ctx.body = {
+    status: 'error',
+    message: 'That movie does not exist.'
+  };
+};
+
 router.get(`${BASE_URL}/:id`, async ctx => {
+  ctx.type = 'application/json';
+
   try {
     const movie = await queries.getSingleMovie(ctx.params.id);
-    if (movie.length) {
-      ctx.body = {
-        status: 'success',
-        data: movie
-      };
-    } else {
-      ctx.status = 404;
-      ctx.type = 'application/json'
-      ctx.body = {
-        status: 'error',
-        message: 'That movie does not exist.'
-      };
+
+    if (!movie.length) {
+      return responseError(ctx);
     }
+
+    ctx.body = {
+      status: 'success',
+      data: movie
+    };
   } catch (error) {
-    console.log(error);
+    return responseError(ctx);
   }
 });
 
@@ -52,7 +59,7 @@ router.post(`${BASE_URL}`, async ctx => {
       };
     } else {
       ctx.status = 400;
-      ctx.type = 'application/json'
+      ctx.type = 'application/json';
       ctx.body = {
         status: 'error',
         message: 'Something went wrong.'
