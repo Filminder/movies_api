@@ -74,6 +74,6 @@ $ npm start
 http://localhost:3000
 ```
 
-Node v9.3.0
-Postgres
-Knex 
+* Node v9.3.0
+* Postgres
+* Knex 
