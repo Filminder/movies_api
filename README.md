@@ -44,6 +44,12 @@ DB_PASSWORD = your_database_password
 ```
 Also, you can take a look on the `.env_example` file
 
+Install knex
+
+```
+$ npm install knex -g
+```
+
 * After create the databases, run the migration:
 
 ```
@@ -65,5 +71,9 @@ $ npm start
 * The project would be running on:
 
 ```
-http://localhost:300
+http://localhost:3000
 ```
+
+Node v9.3.0
+Postgres
+Knex 
