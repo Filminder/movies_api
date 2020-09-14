@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  movies-api:
+    container_name: backend
+    build: ./
+    command: npm start
+    working_dir: /usr/src/movies_api
+    environment:
+      POSTGRES_URI: postgres://postgres:pgsecret@localhost:54320/movies
+    links:
+      - postgres
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/usr/src/movies_api
+  #postgres
+  postgres:
+    container_name: database
+    image: postgres
+    environment:
+      #POSTGRES_USER: pguser
+      POSTGRES_PASSWORD: pgsecret
+      POSTGRES_DB: movies
+      POSTGRES_HOST: postgres
+    ports:
+      - "5432:5432"

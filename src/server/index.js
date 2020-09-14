@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const app = new Koa();
 const PORT = process.env.PORT || 3000;
-
+console.log(process.env.PORT, 'asDFLjkasldfjokalsdfjklasdjs')
 app.use(bodyParser());
 app.use(indexRoutes.routes());
 app.use(movieRoutes.routes());

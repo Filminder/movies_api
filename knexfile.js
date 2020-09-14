@@ -18,9 +18,7 @@ module.exports = {
   },
   development: {
     client: 'pg',
-    connection: `postgres://${process.env.DB_USER}:${
-      process.env.DB_PASSWORD
-    }@localhost:5432/${process.env.DB_NAME}`,
+    connection: process.env.POSTGRES_URI,
     migrations: {
       directory: path.join(BASE_PATH, 'migrations')
     },
