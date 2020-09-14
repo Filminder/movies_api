@@ -6,22 +6,32 @@ services:
     build: ./
     command: npm start
     working_dir: /usr/src/movies_api
-    environment:
-      POSTGRES_URI: postgres://postgres:pgsecret@localhost:54320/movies
     links:
       - postgres
+    environment:
+      DB_NAME: movies
+      DB_USER: postgres
+      DB_PASSWORD: pgsecret
+      DB_HOST: postgres
     ports:
       - "3000:3000"
     volumes:
       - ./:/usr/src/movies_api
+    depends_on:
+      - postgres
+
   #postgres
   postgres:
     container_name: database
     image: postgres
     environment:
-      #POSTGRES_USER: pguser
       POSTGRES_PASSWORD: pgsecret
       POSTGRES_DB: movies
       POSTGRES_HOST: postgres
     ports:
       - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata: {}
