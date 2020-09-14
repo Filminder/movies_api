@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./src/server/index.js",
-    "test": "./node_modules/mocha/bin/_mocha"
+    "test": "./node_modules/mocha/bin/_mocha",
+    "format": "prettier-standard --format --lint --changed"
   },
   "keywords": [],
   "author": "Yasser Batas",
