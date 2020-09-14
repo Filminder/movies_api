@@ -20,7 +20,7 @@ module.exports = {
     client: 'pg',
     connection: `postgres://${process.env.DB_USER}:${
       process.env.DB_PASSWORD
-    }@localhost:5432/${process.env.DB_NAME}`,
+    }@${process.env.DB_HOST}:5432/${process.env.DB_NAME}`,
     migrations: {
       directory: path.join(BASE_PATH, 'migrations')
     },

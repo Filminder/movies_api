@@ -3,24 +3,26 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./src/server/index.js",
-    "test": "./node_modules/mocha/bin/_mocha"
+    "start": "nodemon -L ./src/server/index.js",
+    "test": "./node_modules/mocha/bin/_mocha",
+    "migrate": "./node_modules/.bin/knex migrate:latest",
+    "seed": "./node_modules/.bin/knex seed:run --env development"
   },
   "keywords": [],
   "author": "Yasser Batas",
   "license": "ISC",
   "devDependencies": {
     "chai": "4.1.1",
-    "chai-http": "^4.2.1",
+    "chai-http": "^4.3.0",
     "mocha": "^5.2.0"
   },
   "dependencies": {
     "dotenv": "^6.2.0",
-    "knex": "^0.16.3",
-    "koa": "^2.3.0",
-    "koa-bodyparser": "^4.2.0",
-    "koa-router": "^7.2.1",
-    "nodemon": "^1.18.10",
-    "pg": "^7.1.2"
+    "knex": "^0.16.5",
+    "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^7.4.0",
+    "nodemon": "^1.19.4",
+    "pg": "^7.18.2"
   }
 }
