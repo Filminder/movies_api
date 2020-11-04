@@ -1,11 +1,15 @@
 const Koa = require('koa')
+const dotenv = require('dotenv')
+const Filminder = require('../utils/Filminder')
 const bodyParser = require('koa-bodyparser')
 const indexRoutes = require('./routes/index')
 const movieRoutes = require('./routes/movies')
-require('dotenv').config()
+
+dotenv.config()
 
 const app = new Koa()
-const PORT = process.env.PORT || 3000
+
+const PORT = Filminder.isTestEnvironment() ? 7001 : process.env.PORT || 7000
 
 app.use(bodyParser())
 app.use(indexRoutes.routes())
