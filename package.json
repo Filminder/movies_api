@@ -13,13 +13,20 @@
   "devDependencies": {
     "chai": "4.1.1",
     "chai-http": "4.2.1",
+    "eslint": "5.16.0",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-jest": "24.1.0",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "4.2.1",
+    "eslint-plugin-react": "7.21.5",
+    "eslint-plugin-standard": "4.0.2",
     "husky": "4.3.0",
     "mocha": "5.2.0",
     "prettier-standard": "16.4.1"
   },
   "dependencies": {
     "dotenv": "6.2.0",
-    "knex": "^0.21.5",
+    "knex": "0.21.5",
     "koa": "2.3.0",
     "koa-bodyparser": "4.2.0",
     "koa-router": "7.2.1",

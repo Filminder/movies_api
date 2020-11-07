@@ -76,8 +76,6 @@ describe('routes : movies', () => {
         .request(server)
         .get('/api/v1/movies/abc123')
         .end((err, res) => {
-          console.log('test err', err)
-          console.log('test res', res)
           should.exist(err)
           res.status.should.equal(404)
           res.type.should.equal('application/json')

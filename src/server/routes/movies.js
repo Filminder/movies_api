@@ -1,50 +1,46 @@
 const Router = require('koa-router')
-const router = new Router()
-
 const queries = require('../db/queries/movies')
-const BASE_URL = `/api/v1/movies`
+
+const router = new Router()
+const BASE_URL = '/api/v1/movies'
+
+const responseError = (ctx, errorCode, message) => {
+  ctx.status = errorCode
+  ctx.body = {
+    message,
+    status: 'error',
+    type: 'application/json'
+  }
+}
+
+const responseSuccess = (ctx, data) => {
+  ctx.status = 201
+  ctx.body = {
+    data,
+    status: 'success'
+  }
+}
 
 router.get(BASE_URL, async ctx => {
   try {
     const movies = await queries.getAllMovies()
-    ctx.body = {
-      status: 'success',
-      data: movies
-    }
+    responseSuccess(ctx, movies)
   } catch (err) {
-    ctx.status = 404
-    ctx.body = {
-      status: 'error',
-      type: 'application/json'
-    }
+    responseError(ctx, 404, 'Something went wrong')
   }
 })
 
-const responseError = ctx => {
-  ctx.status = 404
-
-  ctx.body = {
-    status: 'error',
-    message: 'That movie does not exist.'
-  }
-}
-
 router.get(`${BASE_URL}/:id`, async ctx => {
-  ctx.type = 'application/json'
-
   try {
     const movie = await queries.getSingleMovie(ctx.params.id)
 
     if (!movie.length) {
-      return responseError(ctx)
+      return responseError(ctx, 404, 'That movie does not exist')
     }
 
-    ctx.body = {
-      status: 'success',
-      data: movie
-    }
+    return responseSuccess(ctx, movie)
   } catch (error) {
-    return responseError(ctx)
+    return responseError(ctx, 404, 'That movie does not exist')
   }
 })
 
@@ -52,46 +48,16 @@ router.post(`${BASE_URL}`, async ctx => {
   try {
     const movie = await queries.addMovie(ctx.request.body)
     if (movie.length) {
-      ctx.status = 201
-      ctx.body = {
-        status: 'success',
-        data: movie
-      }
+      responseSuccess(ctx, movie)
     } else {
-      ctx.status = 400
-      ctx.type = 'application/json'
-      ctx.body = {
-        status: 'error',
-        message: 'Something went wrong.'
-      }
+      responseError(ctx, 400, 'Something went wrong.')
     }
   } catch (err) {
-    console.log(err)
-  }
-})
-
-router.post(`${BASE_URL}`, async ctx => {
-  try {
-    const movie = await queries.addMovie(ctx.request.body)
-    if (movie.length) {
-      ctx.status = 201
-      ctx.body = {
-        status: 'success',
-        data: movie
-      }
-    } else {
-      ctx.status = 400
-      ctx.body = {
-        status: 'error',
-        message: 'Something went wrong.'
-      }
-    }
-  } catch (err) {
-    ctx.status = 400
-    ctx.body = {
-      status: 'error',
-      message: err.message || 'Sorry, an error has occurred.'
-    }
+    responseError(
+      ctx,
+      400,
+      'Something went wrong. Maybe this movie already exist'
+    )
   }
 })
 

@@ -12,6 +12,7 @@ app.use(indexRoutes.routes())
 app.use(movieRoutes.routes())
 
 const server = app.listen(PORT, () => {
+  /* eslint-disable no-console */
   console.log(`server listening on: http://localhost:${PORT}`)
 })
 
