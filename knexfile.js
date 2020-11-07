@@ -1,14 +1,12 @@
-const path = require('path');
-require('dotenv').config();
+const path = require('path')
+require('dotenv').config()
 
-const BASE_PATH = path.join(__dirname, 'src', 'server', 'db');
+const BASE_PATH = path.join(__dirname, 'src', 'server', 'db')
 
 module.exports = {
   test: {
     client: 'pg',
-    connection: `postgres://${process.env.DB_USER}:${
-      process.env.DB_PASSWORD
-    }@localhost:5432/movies_api_test`,
+    connection: `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@localhost:5432/movies_api_test`,
     migrations: {
       directory: path.join(BASE_PATH, 'migrations')
     },
@@ -18,9 +16,7 @@ module.exports = {
   },
   development: {
     client: 'pg',
-    connection: `postgres://${process.env.DB_USER}:${
-      process.env.DB_PASSWORD
-    }@localhost:5432/${process.env.DB_NAME}`,
+    connection: `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@localhost:5432/${process.env.DB_NAME}`,
     migrations: {
       directory: path.join(BASE_PATH, 'migrations')
     },
@@ -38,4 +34,4 @@ module.exports = {
       directory: path.join(BASE_PATH, 'seeds')
     }
   }
-};
+}
