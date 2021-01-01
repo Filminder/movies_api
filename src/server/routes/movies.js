@@ -1,25 +1,8 @@
 const Router = require('koa-router')
 const queries = require('../db/queries/movies')
+const successResponse = require('../../views/success')
+const responseError = require('../../views/error')
 
-const router = new Router()
-const BASE_URL = '/api/v1/movies'
-
-const responseError = (ctx, errorCode, message) => {
-  ctx.status = errorCode
-  ctx.body = {
-    message,
-    status: 'error',
-    type: 'application/json'
-  }
-}
-
-const responseSuccess = (ctx, data) => {
-  ctx.status = 201
-  ctx.body = {
-    data,
-    status: 'success'
-  }
-}
 
 router.get(BASE_URL, async ctx => {
   try {
