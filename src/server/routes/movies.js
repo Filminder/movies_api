@@ -3,17 +3,20 @@ const queries = require('../db/queries/movies')
 const successResponse = require('../../views/success')
 const responseError = require('../../views/error')
 
+const router = new Router({
+  prefix: '/api/v1/movies'
+})
 
-router.get(BASE_URL, async ctx => {
+router.get('/', async ctx => {
   try {
     const movies = await queries.getAllMovies()
-    responseSuccess(ctx, movies)
-  } catch (err) {
-    responseError(ctx, 404, 'Something went wrong')
+    return successResponse(ctx, movies)
+  } catch (error) {
+    return responseError(ctx, 404, 'Something went wrong')
   }
 })
 
-router.get(`${BASE_URL}/:id`, async ctx => {
+router.get('/:id', async ctx => {
   try {
     const movie = await queries.getSingleMovie(ctx.params.id)
 
@@ -21,17 +24,17 @@ router.get(`${BASE_URL}/:id`, async ctx => {
       return responseError(ctx, 404, 'That movie does not exist')
     }
 
-    return responseSuccess(ctx, movie)
+    return successResponse(ctx, movie)
   } catch (error) {
     return responseError(ctx, 404, 'That movie does not exist')
   }
 })
 
-router.post(`${BASE_URL}`, async ctx => {
+router.post('/', async ctx => {
   try {
     const movie = await queries.addMovie(ctx.request.body)
     if (movie.length) {
-      responseSuccess(ctx, movie)
+      successResponse(ctx, movie)
     } else {
       responseError(ctx, 400, 'Something went wrong.')
     }
@@ -43,5 +46,7 @@ router.post(`${BASE_URL}`, async ctx => {
     )
   }
 })
+
+router.get('/upcoming', async ctx => {})
 
 module.exports = router
