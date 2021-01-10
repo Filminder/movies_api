@@ -1,7 +1,6 @@
 const successResponse = require('../views/success')
 const responseError = require('../views/error')
 const queries = require('../server/db/queries/movies')
-
 const moviesModel = require('../server/db/queries/movies')
 
 async function getAllMovies (ctx) {
@@ -39,7 +38,7 @@ async function createMovie (ctx) {
     } else {
       responseError(ctx, 400, 'Something went wrong.')
     }
-  } catch (err) {
+  } catch (error) {
     responseError(
       ctx,
       400,
@@ -48,8 +47,22 @@ async function createMovie (ctx) {
   }
 }
 
+async function deleteMovie (ctx) {
+  const {
+    params: { id }
+  } = ctx
+
+  try {
+    const deletedMovie = await queries.deleteMovieById(id)
+    successResponse(ctx, deletedMovie)
+  } catch (error) {
+    responseError(ctx, 404, "The movie doesn't exist")
+  }
+}
+
 module.exports = {
   getAllMovies,
   getMovieById,
-  createMovie
+  createMovie,
+  deleteMovie
 }
