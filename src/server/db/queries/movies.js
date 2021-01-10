@@ -12,8 +12,14 @@ const addMovie = movie =>
     .insert(movie)
     .returning('*')
 
+const deleteMovieById = id =>
+  knex('movies')
+    .where('id', Number(id))
+    .del()
+
 module.exports = {
   getAllMovies,
   getSingleMovie,
-  addMovie
+  addMovie,
+  deleteMovieById
 }
