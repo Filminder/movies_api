@@ -1,11 +1,12 @@
 const successResponse = require('../views/success')
 const responseError = require('../views/error')
 const queries = require('../server/db/queries/movies')
-const moviesModel = require('../server/db/queries/movies')
+const api = require('../../api')
+const { stringify } = require('flatted')
 
 async function getAllMovies (ctx) {
   try {
-    const movies = await moviesModel.getAllMovies()
+    const movies = await queries.getAllMovies()
     successResponse(ctx, movies)
   } catch (error) {
     responseError(ctx, 404, 'Something went wrong')
@@ -60,9 +61,24 @@ async function deleteMovie (ctx) {
   }
 }
 
+async function getUpcomingMovies (ctx) {
+  try {
+    console.log(process.env.TMDB_API_KEY, 'API_KEY')
+    console.log(api, 'API')
+    api.get(`/movie/upcoming?api_key=${process.env.TMDB_API_KEY}`).then(res => {
+      console.log(res, 'RES')
+    })
+    //  successResponse(ctx, stringify(response))
+  } catch (e) {
+    console.log(e, 'ERROR')
+    responseError(ctx, 400, 'Bad request')
+  }
+}
+
 module.exports = {
   getAllMovies,
   getMovieById,
   createMovie,
-  deleteMovie
+  deleteMovie,
+  getUpcomingMovies
 }
