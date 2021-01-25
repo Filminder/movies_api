@@ -2,7 +2,6 @@ const successResponse = require('../views/success')
 const responseError = require('../views/error')
 const queries = require('../server/db/queries/movies')
 const api = require('../../api')
-const { stringify } = require('flatted')
 
 async function getAllMovies (ctx) {
   try {
@@ -63,14 +62,9 @@ async function deleteMovie (ctx) {
 
 async function getUpcomingMovies (ctx) {
   try {
-    console.log(process.env.TMDB_API_KEY, 'API_KEY')
-    console.log(api, 'API')
-    api.get(`/movie/upcoming?api_key=${process.env.TMDB_API_KEY}`).then(res => {
-      console.log(res, 'RES')
-    })
-    //  successResponse(ctx, stringify(response))
+    const { data: response } = await api.get(`/movie/upcoming?api_key=${process.env.TMDB_API_KEY}`)
+    successResponse(ctx, response)
   } catch (e) {
-    console.log(e, 'ERROR')
     responseError(ctx, 400, 'Bad request')
   }
 }
