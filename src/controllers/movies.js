@@ -62,7 +62,9 @@ async function deleteMovie (ctx) {
 
 async function getUpcomingMovies (ctx) {
   try {
-    const { data: response } = await api.get(`/movie/upcoming?api_key=${process.env.TMDB_API_KEY}`)
+    const { data: response } = await api.get(
+      `/movie/upcoming?api_key=${process.env.TMDB_API_KEY}`
+    )
     successResponse(ctx, response)
   } catch (e) {
     responseError(ctx, 400, 'Bad request')
